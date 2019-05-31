@@ -1,0 +1,12 @@
+{
+	"servers": ["https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-control/"],
+	"supportUrl": "https://github.com/Foglio1024/ttb-interface/issues",
+	"name": "ttb-interface-control",
+	"author": "Foglio",
+	"description": "Generic HTTP interface used to request data like protocol version or dump opcodes/sysmsg.",
+	"disableAutoUpdate": false,
+	"options": {
+		"niceName": "ttb-interface-control",
+		"guiName": "ttb-interface-control"
+	}
+}
