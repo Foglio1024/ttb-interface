@@ -109,7 +109,7 @@ class TcpInterface
         ];
         opcodes.forEach(opcode =>
         {
-            this.mod.hook(opcode, 'raw', (code, data) =>
+            this.mod.hook(opcode, 'raw', { order: -999}, (code, data) =>
             {
                 this.interface.write(this.build(data));
             });
