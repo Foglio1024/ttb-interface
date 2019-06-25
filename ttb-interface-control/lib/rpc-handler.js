@@ -55,5 +55,17 @@ class RpcHandler
         });
         return ret;
     }
+
+    addHooks(params){
+        params.hooks.forEach(opc => {
+            this.mod.command.exec(`tid add ${opc}`)
+        })
+    }
+    
+    removeHooks(params){
+        params.hooks.forEach(opc => {
+            this.mod.command.exec(`tid rem ${opc}`)
+        })
+    }
 }
 exports.RpcHandler = RpcHandler;

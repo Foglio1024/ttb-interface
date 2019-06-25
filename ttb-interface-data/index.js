@@ -6,6 +6,20 @@ const port = 5200;
 
 class TcpInterface
 {
+    installRawHook(opcode)
+    {
+        this.mod.hook(opcode, 'raw', { order: -999 }, (code, data) =>
+        {
+            this.interface.write(this.build(data));
+        })
+    }
+    removeRawHook(opcode)
+    {
+        this.mod.unhook(opcode, 'raw', { order: -999 }, (code, data) =>
+        {
+            this.interface.write(this.build(data));
+        })
+    }
     installHooks()
     {
         //TODO: get them from file or dynamically change them via control connection
@@ -107,23 +121,29 @@ class TcpInterface
             'S_LEARN_EP_PERK',
             'S_RESET_EP_PERK'
         ];
-        opcodes.forEach(opcode =>
-        {
-            this.mod.hook(opcode, 'raw', { order: -999}, (code, data) =>
-            {
-                this.interface.write(this.build(data));
-            });
-        });
+        opcodes.forEach(this.installRawHook);
     }
     constructor(mod)
     {
         this.mod = mod;
+        mod.command.add('tid', (cmd, arg) =>
+        {
+            switch (cmd)
+            {
+                case 'add':
+                    this.installRawHook(arg);
+                    break;
+                case 'rem':
+                    this.removeRawHook(arg);
+                    break;
+            }
+        });
         this.interface = new net.Socket();
         this.interface.connect(port, address);
-        this.interface.on('error', (err) => { console.log("[tcp-interface] " + err) });
-        this.interface.on('connect', () => { console.log("[tcp-interface] Connected!") });
+        this.interface.on('error', (err) => { console.log("[ttb-interface] " + err) });
+        this.interface.on('connect', () => { console.log("[ttb-interface] Connected!") });
 
-        this.installHooks();
+        //this.installHooks();
     }
 
     build(payload)
