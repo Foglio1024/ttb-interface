@@ -8,14 +8,24 @@ class TcpInterface
 {
     installRawHook(opcode)
     {
-        this.mod.hook(opcode, 'raw', { order: -999 }, (code, data) =>
+        let options = { order: -999 };
+        if (opcode == "S_PRIVATE_CHAT")
+        {
+            options.filter = { fake: null };
+        }
+        this.mod.hook(opcode, 'raw', options, (code, data) =>
         {
             this.interface.write(this.build(data));
         })
     }
     removeRawHook(opcode)
     {
-        this.mod.unhook(opcode, 'raw', { order: -999 }, (code, data) =>
+        let options = { order: -999 };
+        if (opcode == "S_PRIVATE_CHAT")
+        {
+            options.filter = { fake: null };
+        }
+        this.mod.unhook(opcode, 'raw', options, (code, data) =>
         {
             this.interface.write(this.build(data));
         })
