@@ -13,6 +13,8 @@ class TcpInterface
         {
             options.filter = { fake: null };
         }
+        if(opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
+
         this.mod.hook(opcode, 'raw', options, (code, data) =>
         {
             this.interface.write(this.build(data));
@@ -25,6 +27,8 @@ class TcpInterface
         {
             options.filter = { fake: null };
         }
+        if(opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
+
         this.mod.unhook(opcode, 'raw', options, (code, data) =>
         {
             this.interface.write(this.build(data));
