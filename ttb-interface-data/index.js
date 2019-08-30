@@ -9,7 +9,7 @@ class TcpInterface
     installRawHook(opcode)
     {
         let options = { order: -999 };
-        if (opcode == "S_PRIVATE_CHAT")
+        if (opcode == "S_PRIVATE_CHAT" || opcode == "S_JOIN_PRIVATE_CHANNEL")
         {
             options.filter = { fake: null };
         }
@@ -23,7 +23,7 @@ class TcpInterface
     removeRawHook(opcode)
     {
         let options = { order: -999 };
-        if (opcode == "S_PRIVATE_CHAT")
+        if (opcode == "S_PRIVATE_CHAT" || opcode == "S_JOIN_PRIVATE_CHANNEL")
         {
             options.filter = { fake: null };
         }
