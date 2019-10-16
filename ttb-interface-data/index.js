@@ -6,6 +6,7 @@ const port = 5200;
 
 class TcpInterface
 {
+    installedHooks = 0;
     installRawHook(opcode)
     {
         let options = { order: -999 };
@@ -13,7 +14,8 @@ class TcpInterface
         {
             options.filter = { fake: null };
         }
-        if(opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
+        if (opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
+        this.installedHooks++;
 
         this.mod.hook(opcode, 'raw', options, (code, data) =>
         {
@@ -27,7 +29,7 @@ class TcpInterface
         {
             options.filter = { fake: null };
         }
-        if(opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
+        if (opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
 
         this.mod.unhook(opcode, 'raw', options, (code, data) =>
         {
@@ -39,11 +41,16 @@ class TcpInterface
         let opcodes = ['C_CHECK_VERSION', 'C_LOGIN_ARBITER'];
         opcodes.forEach(o =>
         {
+            this.installedHooks++;
             mod.hook(o, 'raw', { order: -999 }, (code, data) =>
             {
                 this.interface.write(this.build(data));
             })
         });
+    }
+    printInfo()
+    {
+        this.mod.log('Installed hooks: ' + this.installedHooks);
     }
     constructor(mod)
     {
@@ -57,6 +64,9 @@ class TcpInterface
                     break;
                 case 'rem':
                     this.removeRawHook(arg);
+                    break;
+                case 'print':
+                    this.printInfo();
                     break;
             }
         });
