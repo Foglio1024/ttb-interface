@@ -24,6 +24,12 @@ class RpcHandler
     {
         return this.mod.protocolVersion;
     }
+    
+    // Returns client ReleaseVersion
+    getReleaseVersion()
+    {
+        return this.mod.majorPatchVersion + '.' + this.mod.minorPatchVersion;
+    }
 
     // Dumps opcodes or sysmsg to the specified file in the "NAME CODE" format
     // params.path    : "full/path/to/file",
