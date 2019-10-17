@@ -39,7 +39,7 @@ class RpcServer
                     respType = 'error';
                     rpcResult = {
                         'code': -1,
-                        'message': error
+                        'message': error.toString()
                     };
                 }
                 let jsonResponse = Helpers.buildResponse(rpcResult, rpcRequest.id, respType);
