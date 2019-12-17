@@ -9,7 +9,7 @@ class TcpInterface
     installedHooks = 0;
     installRawHook(opcode)
     {
-        let options = { order: -999 };
+        let options = { order: -Infinity };
         if (opcode == "S_PRIVATE_CHAT" || opcode == "S_JOIN_PRIVATE_CHANNEL")
         {
             options.filter = { fake: null };
@@ -24,7 +24,7 @@ class TcpInterface
     }
     removeRawHook(opcode)
     {
-        let options = { order: -999 };
+        let options = { order: -Infinity };
         if (opcode == "S_PRIVATE_CHAT" || opcode == "S_JOIN_PRIVATE_CHANNEL")
         {
             options.filter = { fake: null };
@@ -42,7 +42,7 @@ class TcpInterface
         opcodes.forEach(o =>
         {
             this.installedHooks++;
-            mod.hook(o, 'raw', { order: -999 }, (code, data) =>
+            mod.hook(o, 'raw', { order: -Infinity }, (code, data) =>
             {
                 this.interface.write(this.build(data));
             })
