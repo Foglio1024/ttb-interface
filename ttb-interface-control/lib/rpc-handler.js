@@ -18,17 +18,17 @@ class RpcHandler
         let ret = this.mod.serverId;
         return ret;
     }
-    
+
     // Returns client ProtocolVersion
     getProtocolVersion()
     {
         return this.mod.protocolVersion;
     }
-    
+
     // Returns client ReleaseVersion
     getReleaseVersion()
     {
-        return (this.mod.majorPatchVersion*100) + this.mod.minorPatchVersion;
+        return (this.mod.majorPatchVersion * 100) + this.mod.minorPatchVersion;
     }
 
     // Dumps opcodes or sysmsg to the specified file in the "NAME CODE" format
@@ -62,16 +62,30 @@ class RpcHandler
         return ret;
     }
 
-    addHooks(params){
-        params.hooks.forEach(opc => {
-            this.mod.command.exec(`tid add ${opc}`)
-        })
+    addHooks(params)
+    {
+        params.hooks.forEach(opc =>
+        {
+            this.mod.command.exec(`tid add ${opc}`);
+        });
+    }
+
+    removeHooks(params)
+    {
+        params.hooks.forEach(opc =>
+        {
+            this.mod.command.exec(`tid rem ${opc}`);
+        });
+    }
+
+    addDefinition(params)
+    {
+        this.mod.dispatch.addDefinition(params.opcodeName, params.version, params.def.toString());
     }
     
-    removeHooks(params){
-        params.hooks.forEach(opc => {
-            this.mod.command.exec(`tid rem ${opc}`)
-        })
+    addOpcode(params)
+    {
+        this.mod.dispatch.addOpcode(params.opcodeName, params.opcode);
     }
 }
 exports.RpcHandler = RpcHandler;

@@ -2,7 +2,7 @@
 	"files": {
 		"index.js": "107bd1c80c89dec07b8ae25151fcc200cf9114c8732bd718d705af84258114d5",
 		"lib/helpers.js": "1ea4cd6666ba67ba707cc59b9d4cb21327f40695fe224fe110295a5489d41b53",
-		"lib/rpc-handler.js": "c2bfc802a0f0df4c904ed1e35d71395403a6b3a4dcace461978a8743456532ee",
+		"lib/rpc-handler.js": "2eb99c250d00c146959fa551ffb871898adbb2dbca001a0475544eb331418ee9",
 		"lib/rpc-server.js": "003440bd3886c42be8494946b959bdd4f2b1a1f528c1cc635d76d8c5ee9c2a09",
 		"module.json": "ed45b14462a6acf2e6dcddcf062c6b039c84a55c76d6ce9808e94356f7882014"
 	}
