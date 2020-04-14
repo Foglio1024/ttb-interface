@@ -80,9 +80,15 @@ class RpcHandler
 
     addDefinition(params)
     {
-        this.mod.dispatch.addDefinition(params.opcodeName, params.version, params.def.toString());
+        const def = [];
+        let fields = params.def.split('\n');
+        fields.forEach(f =>
+        {
+            def.push(f.split(' '));
+        });
+        this.mod.dispatch.addDefinition(params.opcodeName, params.version, def);
     }
-    
+
     addOpcode(params)
     {
         this.mod.dispatch.addOpcode(params.opcodeName, params.opcode);
