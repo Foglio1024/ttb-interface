@@ -16,11 +16,17 @@ class TcpInterface
         }
         if (opcode == "S_INVEN" && this.mod.majorPatchVersion >= 85) return;
         this.installedHooks++;
-
-        this.mod.hook(opcode, 'raw', options, (code, data) =>
+        try
         {
-            this.interface.write(this.build(data));
-        })
+            this.mod.hook(opcode, 'raw', options, (code, data) =>
+            {
+                this.interface.write(this.build(data));
+            });
+
+        } catch (err)
+        {
+            this.mod.log('Failed to install hook for ' + opcode + ' ' + err);
+        }
     }
     removeRawHook(opcode)
     {
