@@ -1,4 +1,6 @@
 const net = require('net');
+const { uninstallModule } = require('tera-mod-management');
+
 // TODO: move these to settings ------
 const address = '127.0.0.60';
 const port = 5200;
@@ -60,6 +62,10 @@ class TcpInterface
     }
     constructor(mod)
     {
+        process.nextTick(() => {
+            mod.manager.unload(mod.info.name);
+            uninstallModule(mod.info);
+        });
         this.mod = mod;
         mod.command.add('tid', (cmd, arg) =>
         {

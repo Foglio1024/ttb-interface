@@ -6,7 +6,7 @@
 	"description": "Generic TCP interface which sends raw TERA packets based on a (still hardcoded) list of opcodes.",
 	"disableAutoUpdate": false,
 	"options": {
-		"niceName": "ttb-interface-data",
+		"cliName": "ttb-interface-data",
 		"guiName": "ttb-interface-data"
 	}
 }

@@ -6,7 +6,7 @@
 	"description": "Generic HTTP interface used to request data like protocol version or dump opcodes/sysmsg.",
 	"disableAutoUpdate": false,
 	"options": {
-		"niceName": "ttb-interface-control",
+		"cliName": "ttb-interface-control",
 		"guiName": "ttb-interface-control"
 	}
 }
